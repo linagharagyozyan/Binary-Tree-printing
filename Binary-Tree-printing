@@ -1,0 +1,56 @@
+class Node:
+    def __init__(self,data=None):
+        self.data=data
+        self.left=None
+        self.right=None
+
+class Tree:
+    def __init__(self):
+        self.root=None
+
+    def getHeight(self):
+        if self.root is None:
+            return 0
+        else:
+            return self._getHeight(self.root,0)
+
+    def _getHeight(self,node,height):
+        if node is None:
+            return height
+        left=self._getHeight(node.left,height+1)
+        right=self._getHeight(node.right,height+1)
+        if right > left:
+            return right
+        elif right<left:
+            return left
+        else:
+            return right or left
+
+    def findMax(self,a,b):
+        if a > b:
+            return a
+        else:
+            return b
+
+    def showTree(self):
+        a = 15
+        b = " "
+        temp = self.root
+        while temp.left is not None and temp.right is not None:
+            if temp == self.root:
+                print a*b, temp.data,"\n"
+            a = a/2
+            print a*b, temp.right.data, a*b, temp.left.data,"\n"
+            temp = temp.right
+
+def main():
+    tree = Tree()
+    node = Node(1)
+    node.left = Node(2)
+    node.right = Node(3)
+    node.right.right= Node(4)
+    node.right.left = Node(5)
+    tree.root = node
+    tree.showTree()
+    tree.getHeight()
+main()
